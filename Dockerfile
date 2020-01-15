@@ -1,8 +1,12 @@
 FROM mcr.microsoft.com/dotnet/core/runtime-deps:2.1-bionic
 
-RUN apt-get update \
+# set noninteractive installation and install required libraries
+RUN export DEBIAN_FRONTEND=noninteractive \
+    && apt-get update \
     && apt-get install -y --no-install-recommends \
-        curl \
+    curl \
+    libicu-dev \
+    tzdata \
     && rm -rf /var/lib/apt/lists/*
 
 # Install ASP.NET Core
